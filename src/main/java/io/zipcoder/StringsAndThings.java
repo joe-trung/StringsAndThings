@@ -1,6 +1,8 @@
 package io.zipcoder;
 
 
+import org.codehaus.plexus.util.StringUtils;
+
 /**
  * @author tariq
  */
@@ -15,7 +17,19 @@ public class StringsAndThings {
      *           countYZ("day fyyyz"); // Should return 2
      */
     public Integer countYZ(String input){
-        return null;
+        String[] wordCount = input.split(" ");
+        char yy = 'y';
+        char zz = 'z';
+        int i;
+        int j=0;
+        for (i=0;i<wordCount.length;i++) {
+            Character check = (wordCount[i].charAt(wordCount[i].length()-1));
+            // I could have used endWith() if i know this before
+            if (check == yy || check == zz) {
+                j++;
+            }
+        }
+        return j;
     }
 
     /**
@@ -28,7 +42,7 @@ public class StringsAndThings {
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
     public String removeString(String base, String remove){
-        return null;
+        return base.replaceAll(remove,"");
     }
 
     /**
@@ -40,8 +54,33 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input){
-        return null;
+        int i = StringUtils.countMatches(input, "is");
+        int j = StringUtils.countMatches(input, "not");
+        if (i-j==0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
+
+
+    //copied from the internet, understood.
+    /**    public static int countMatches(String str, String sub) {
+     if (isEmpty(str) || isEmpty(sub)) {
+     return 0;
+     }
+     int count = 0;
+     int idx = 0;
+     while ((idx = str.indexOf(sub, idx)) != -1) {
+     count++;
+     idx += sub.length();
+     }
+     return count;
+     }
+     */
+
+
 
     /**
      * We'll say that a lowercase 'g' in a string is "happy" if there is another 'g' immediately to its left or right.
@@ -51,7 +90,20 @@ public class StringsAndThings {
      *           gHappy("xxggyygxx") // Should return  false
      */
     public Boolean gIsHappy(String input){
-        return null;
+        String[] arr = input.split("");
+        int i;
+        int j = 0;
+        for (i=0;i<input.length()-2;i++) {
+            if (arr[i].equals(arr[i+1]) && arr[i].equals("g")) {
+                j++;
+            }
+        }
+        if (j>0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 
@@ -63,6 +115,20 @@ public class StringsAndThings {
      *            countTriple("a") // Should return 0
      */
     public Integer countTriple(String input){
-        return null;
+        int j = 0;
+        if (input.length()<2) {
+            j = 0;
+        }
+        else {
+            String[] arr = input.split("");
+            int i;
+            for (i=0;i<input.length()-3;i++) {
+                if ((arr[i].equals(arr[i+1])) && (arr[i].equals(arr[i+2]))) {
+                    j++;
+                }
+            }
+        }
+        return j;
     }
 }
+
